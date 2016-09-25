@@ -19,6 +19,13 @@ module VagrantPlugins
           ips.push(ip)
         end
 
+        if @machine.provider_name == :libvirt
+          ssh_info = @machine.ssh_info
+          if ssh_info
+            ips.push(ssh_info[:host])
+          end
+        end
+
         return ips
       end
 
